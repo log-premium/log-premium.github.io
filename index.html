@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
   <title>Copy Link</title>
   <style>
     * {
@@ -13,193 +13,258 @@
 
     body {
       min-height: 100vh;
-      background: #f8fafc;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #ffffff;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 1rem;
+      padding: 12px;
     }
 
     .container {
-      background: white;
-      border-radius: 28px;
-      padding: 2rem 1.5rem;
-      max-width: 400px;
+      background: #ffffff;
+      border-radius: 32px;
+      padding: 28px 22px;
+      max-width: 380px;
       width: 100%;
-      box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1);
-      border: 1px solid #e9e9e9;
+      box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.15);
+      border: 1px solid #f0f0f0;
+    }
+
+    /* آیکون هدر */
+    .header-icon {
+      background: #f3f6fc;
+      width: 48px;
+      height: 48px;
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+      font-size: 24px;
     }
 
     h1 {
-      font-size: 1.5rem;
+      font-size: 24px;
       font-weight: 600;
-      color: #1e293b;
-      margin-bottom: 0.5rem;
+      color: #11181c;
+      margin-bottom: 6px;
+      letter-spacing: -0.3px;
     }
 
     .description {
-      color: #64748b;
-      font-size: 0.95rem;
+      color: #546e7a;
+      font-size: 14px;
       line-height: 1.5;
-      margin-bottom: 1.5rem;
+      margin-bottom: 24px;
+      font-weight: 400;
     }
 
+    /* کارت لینک */
     .link-card {
-      background: #f1f5f9;
-      border-radius: 16px;
-      padding: 1rem;
-      margin-bottom: 1.25rem;
-      border: 1px solid #e2e8f0;
+      background: #f8f9fa;
+      border-radius: 20px;
+      padding: 16px 14px;
+      margin-bottom: 20px;
+      border: 1px solid #eef2f6;
+      transition: all 0.2s ease;
+    }
+
+    .link-card:active {
+      background: #f0f3f7;
     }
 
     .link-label {
-      color: #475569;
-      font-size: 0.7rem;
-      font-weight: 600;
+      color: #5c6f7c;
+      font-size: 11px;
+      font-weight: 500;
       text-transform: uppercase;
-      letter-spacing: 0.3px;
-      margin-bottom: 0.4rem;
+      letter-spacing: 0.4px;
+      margin-bottom: 8px;
       display: block;
     }
 
     .url-box {
-      color: #0f172a;
-      font-family: 'SF Mono', 'Roboto Mono', monospace;
-      font-size: 0.9rem;
+      color: #0a1929;
+      font-family: 'SF Mono', 'Roboto Mono', 'Fira Code', monospace;
+      font-size: 14px;
       word-break: break-all;
       font-weight: 500;
+      line-height: 1.5;
+      padding: 2px 0;
     }
 
     .url-box span {
-      color: #2563eb;
+      color: #0066cc;
     }
 
+    /* دکمه کپی */
     .copy-btn {
       width: 100%;
-      background: #2563eb;
+      background: #11181c;
       border: none;
-      border-radius: 14px;
-      padding: 1rem;
+      border-radius: 18px;
+      padding: 16px 20px;
       color: white;
-      font-size: 1rem;
+      font-size: 15px;
       font-weight: 500;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 0.5rem;
+      gap: 10px;
       cursor: pointer;
-      transition: background 0.2s;
-      margin: 1rem 0;
-      border: 1px solid #1d4ed8;
-    }
-
-    .copy-btn:hover {
-      background: #1d4ed8;
+      transition: all 0.2s ease;
+      margin: 20px 0 16px;
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
     }
 
     .copy-btn:active {
-      transform: scale(0.99);
+      background: #2d3942;
+      transform: scale(0.98);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
     }
 
+    .copy-btn i {
+      font-size: 18px;
+    }
+
+    /* پیام موفقیت */
     .success-msg {
-      background: #dcfce7;
-      color: #166534;
-      padding: 0.75rem;
-      border-radius: 10px;
-      margin: 0.5rem 0 1rem;
+      background: #edf7ed;
+      color: #1e4620;
+      padding: 12px 16px;
+      border-radius: 30px;
+      margin: -8px 0 18px;
       display: none;
-      font-size: 0.9rem;
+      font-size: 13px;
+      font-weight: 500;
       text-align: center;
-      border: 1px solid #bbf7d0;
+      border: 1px solid #cde8cd;
+      letter-spacing: -0.2px;
     }
 
+    /* راهنما */
     .guide {
-      background: #f8fafc;
-      border-radius: 14px;
-      padding: 1rem;
-      border: 1px solid #e2e8f0;
+      background: #f8f9fa;
+      border-radius: 22px;
+      padding: 18px 16px;
+      border: 1px solid #eef2f6;
     }
 
     .guide-title {
-      color: #334155;
-      font-size: 0.8rem;
+      color: #2f3e4a;
+      font-size: 12px;
       font-weight: 600;
       text-transform: uppercase;
-      margin-bottom: 0.75rem;
-      letter-spacing: 0.3px;
+      margin-bottom: 16px;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .guide-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
     }
 
     .step {
       display: flex;
       align-items: center;
-      gap: 0.75rem;
-      color: #475569;
-      font-size: 0.9rem;
-      padding: 0.4rem 0;
+      gap: 12px;
+      color: #2d3f4e;
+      font-size: 13px;
     }
 
     .step-number {
-      background: #e2e8f0;
-      color: #334155;
-      width: 1.6rem;
-      height: 1.6rem;
-      border-radius: 8px;
+      background: #ffffff;
+      color: #11181c;
+      width: 28px;
+      height: 28px;
+      border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.8rem;
+      font-size: 13px;
+      font-weight: 600;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.02);
+      border: 1px solid #e2eaf0;
+    }
+
+    .step-text {
+      flex: 1;
+      line-height: 1.4;
+    }
+
+    .step-text strong {
+      color: #0066cc;
       font-weight: 600;
     }
 
     .footer-note {
       text-align: center;
-      margin-top: 1.2rem;
-      color: #94a3b8;
-      font-size: 0.75rem;
+      margin-top: 18px;
+      color: #8f9ea9;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.2px;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>📋 Copy Link</h1>
+    <!-- آیکون -->
+    <div class="header-icon">🔗</div>
+
+    <!-- عنوان و توضیح -->
+    <h1>Copy & open</h1>
     <p class="description">
-      Copy the link below and open it in Chrome or Firefox browser.
+      Copy the link and open it in Chrome or Firefox
     </p>
 
+    <!-- کارت لینک -->
     <div class="link-card">
-      <span class="link-label">LINK</span>
+      <span class="link-label">🔗 LINK</span>
       <div class="url-box" id="urlDisplay">
         <span>https://</span>log-account.github.io
       </div>
     </div>
 
+    <!-- دکمه کپی -->
     <button class="copy-btn" id="copyBtn">
-      <span>📋</span> Copy Link
+      <i>📋</i> Copy link
     </button>
 
+    <!-- پیام موفقیت -->
     <div class="success-msg" id="successMsg">
-      ✓ Link copied to clipboard
+      ✓ Copied to clipboard
     </div>
 
+    <!-- راهنمای سریع -->
     <div class="guide">
-      <div class="guide-title">HOW TO OPEN</div>
-      <div class="step">
-        <div class="step-number">1</div>
-        <div>Tap "Copy Link" button</div>
+      <div class="guide-title">
+        <span>⚡</span> Quick steps
       </div>
-      <div class="step">
-        <div class="step-number">2</div>
-        <div>Open Chrome or Firefox</div>
-      </div>
-      <div class="step">
-        <div class="step-number">3</div>
-        <div>Paste in address bar & go</div>
+      <div class="guide-steps">
+        <div class="step">
+          <div class="step-number">1</div>
+          <div class="step-text">Tap <strong>Copy link</strong></div>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <div class="step-text">Open <strong>Chrome</strong> or <strong>Firefox</strong></div>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <div class="step-text">Paste & press Enter</div>
+        </div>
       </div>
     </div>
 
+    <!-- فوتر -->
     <div class="footer-note">
-      This link works best in Chrome or Firefox
+      works best in chrome / firefox
     </div>
   </div>
 
@@ -226,7 +291,7 @@
     function showMessage() {
       const msg = document.getElementById('successMsg');
       msg.style.display = 'block';
-      setTimeout(() => msg.style.display = 'none', 2000);
+      setTimeout(() => msg.style.display = 'none', 1800);
     }
   </script>
 </body>
