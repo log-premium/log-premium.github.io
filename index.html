@@ -3,292 +3,231 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Redirecting...</title>
+  <title>Copy Link</title>
   <style>
-    body {
+    * {
       margin: 0;
       padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      box-sizing: border-box;
     }
-    .message-container {
+
+    body {
       min-height: 100vh;
+      background: #f8fafc;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      padding: 12px;
+      padding: 1rem;
     }
+
     .container {
       background: white;
-      padding: 24px 18px;
-      border-radius: 24px;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+      border-radius: 28px;
+      padding: 2rem 1.5rem;
       max-width: 400px;
       width: 100%;
-      text-align: center;
+      box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1);
+      border: 1px solid #e9e9e9;
     }
+
     h1 {
-      font-size: 1.6em;
-      margin-bottom: 8px;
-      color: #1a1a1a;
+      font-size: 1.5rem;
       font-weight: 600;
+      color: #1e293b;
+      margin-bottom: 0.5rem;
     }
-    .subtitle {
-      color: #666;
-      margin-bottom: 20px;
-      font-size: 0.9em;
+
+    .description {
+      color: #64748b;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin-bottom: 1.5rem;
     }
+
+    .link-card {
+      background: #f1f5f9;
+      border-radius: 16px;
+      padding: 1rem;
+      margin-bottom: 1.25rem;
+      border: 1px solid #e2e8f0;
+    }
+
+    .link-label {
+      color: #475569;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      margin-bottom: 0.4rem;
+      display: block;
+    }
+
     .url-box {
-      background: #f5f5f5;
-      padding: 12px 10px;
-      border-radius: 12px;
-      margin: 16px 0;
-      border: 1px solid #e0e0e0;
+      color: #0f172a;
+      font-family: 'SF Mono', 'Roboto Mono', monospace;
+      font-size: 0.9rem;
       word-break: break-all;
-      font-family: monospace;
-      font-size: 0.85em;
-      color: #2563eb;
       font-weight: 500;
     }
-    .button-group {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin: 20px 0;
+
+    .url-box span {
+      color: #2563eb;
     }
-    .btn {
-      padding: 14px 16px;
+
+    .copy-btn {
+      width: 100%;
+      background: #2563eb;
       border: none;
       border-radius: 14px;
-      font-size: 0.95em;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s;
+      padding: 1rem;
       color: white;
+      font-size: 1rem;
+      font-weight: 500;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      width: 100%;
+      gap: 0.5rem;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin: 1rem 0;
+      border: 1px solid #1d4ed8;
     }
-    .btn:active {
-      transform: scale(0.97);
+
+    .copy-btn:hover {
+      background: #1d4ed8;
     }
-    .btn-chrome {
-      background: #ea4335;
-      box-shadow: 0 4px 12px rgba(234, 67, 53, 0.3);
+
+    .copy-btn:active {
+      transform: scale(0.99);
     }
-    .btn-firefox {
-      background: #ff7139;
-      box-shadow: 0 4px 12px rgba(255, 113, 57, 0.3);
-    }
-    .btn-copy {
-      background: #34a853;
-      box-shadow: 0 4px 12px rgba(52, 168, 83, 0.3);
-    }
-    .help-box {
-      background: #f8f9fa;
-      border: 1px solid #e9ecef;
-      color: #495057;
-      padding: 14px;
-      border-radius: 14px;
-      margin-top: 16px;
-      text-align: left;
-      font-size: 0.85em;
-    }
-    .warning-box {
-      background: #fff3cd;
-      border: 2px solid #ffc107;
-      color: #856404;
-      padding: 16px;
-      border-radius: 14px;
-      margin: 16px 0;
-      text-align: center;
-      font-size: 0.95em;
-      font-weight: 500;
-    }
-    .telegram-warning {
-      background: #e3342f;
-      color: white;
-      padding: 16px;
-      border-radius: 14px;
-      margin: 20px 0 10px;
-      font-weight: 500;
-    }
-    .loading {
+
+    .success-msg {
+      background: #dcfce7;
+      color: #166534;
+      padding: 0.75rem;
+      border-radius: 10px;
+      margin: 0.5rem 0 1rem;
       display: none;
-      color: #1a73e8;
-      margin-top: 20px;
-      font-weight: 500;
+      font-size: 0.9rem;
+      text-align: center;
+      border: 1px solid #bbf7d0;
     }
-    .note {
-      color: #666;
-      font-size: 0.8em;
-      margin-top: 10px;
+
+    .guide {
+      background: #f8fafc;
+      border-radius: 14px;
+      padding: 1rem;
+      border: 1px solid #e2e8f0;
+    }
+
+    .guide-title {
+      color: #334155;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+      letter-spacing: 0.3px;
+    }
+
+    .step {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: #475569;
+      font-size: 0.9rem;
+      padding: 0.4rem 0;
+    }
+
+    .step-number {
+      background: #e2e8f0;
+      color: #334155;
+      width: 1.6rem;
+      height: 1.6rem;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .footer-note {
+      text-align: center;
+      margin-top: 1.2rem;
+      color: #94a3b8;
+      font-size: 0.75rem;
     }
   </style>
 </head>
 <body>
-  <div id="content" style="display: none;">
-    <div class="message-container">
-      <div class="container">
-        <h1>🔗 Open Link</h1>
-        <p class="subtitle">This link only works in Chrome or Firefox</p>
-        
-        <div class="warning-box" id="browserWarning">
-          ⚠️ You are using Telegram's internal browser
-        </div>
-        
-        <div class="url-box" id="urlDisplay">
-          https://log-account.github.io
-        </div>
+  <div class="container">
+    <h1>📋 Copy Link</h1>
+    <p class="description">
+      Copy the link below and open it in Chrome or Firefox browser.
+    </p>
 
-        <div class="button-group">
-          <!-- دکمه باز کردن در کروم -->
-          <button class="btn btn-chrome" id="chromeBtn">
-            <span>📱</span> Open in Chrome
-          </button>
-          
-          <!-- دکمه باز کردن در فایرفاکس -->
-          <button class="btn btn-firefox" id="firefoxBtn">
-            <span>🦊</span> Open in Firefox
-          </button>
-          
-          <!-- دکمه کپی لینک -->
-          <button class="btn btn-copy" id="copyBtn">
-            <span>📋</span> Copy Link
-          </button>
-        </div>
-
-        <div class="help-box">
-          <h3>📌 Quick Guide:</h3>
-          <ol style="margin-top: 10px; padding-left: 20px;">
-            <li>Try <strong>"Open in Chrome"</strong> or <strong>"Open in Firefox"</strong> buttons first</li>
-            <li>If that doesn't work, use <strong>"Copy Link"</strong></li>
-            <li>Paste in Chrome/Firefox manually</li>
-          </ol>
-          <p style="margin-top: 15px; color: #d32f2f; font-weight: bold; text-align: center;">
-            ❗ This link WILL NOT work inside Telegram
-          </p>
-        </div>
-        
-        <div class="telegram-warning">
-          <span style="font-size: 1.5em;">⚠️</span><br>
-          <strong>Important:</strong><br>
-          You MUST open this link in Chrome or Firefox, not in Telegram!
-        </div>
-        
-        <p class="note">The "Open in" buttons will try to open the link in your default browser</p>
+    <div class="link-card">
+      <span class="link-label">LINK</span>
+      <div class="url-box" id="urlDisplay">
+        <span>https://</span>log-account.github.io
       </div>
     </div>
-  </div>
-  
-  <div class="loading" id="loading">
-    Redirecting...
+
+    <button class="copy-btn" id="copyBtn">
+      <span>📋</span> Copy Link
+    </button>
+
+    <div class="success-msg" id="successMsg">
+      ✓ Link copied to clipboard
+    </div>
+
+    <div class="guide">
+      <div class="guide-title">HOW TO OPEN</div>
+      <div class="step">
+        <div class="step-number">1</div>
+        <div>Tap "Copy Link" button</div>
+      </div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <div>Open Chrome or Firefox</div>
+      </div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <div>Paste in address bar & go</div>
+      </div>
+    </div>
+
+    <div class="footer-note">
+      This link works best in Chrome or Firefox
+    </div>
   </div>
 
   <script>
-    // Target link
     const TARGET_URL = "https://log-account.github.io";
     
-    // تشخیص مرورگر کروم یا فایرفاکس
-    function isChromeOrFirefox() {
-      const ua = navigator.userAgent.toLowerCase();
-      
-      // تشخیص Chrome (و نه Edge/Opera)
-      const isChrome = !!window.chrome && 
-                       navigator.vendor?.toLowerCase().includes('google') && 
-                       !/edg\//.test(ua) && 
-                       !/opr\//.test(ua);
-      
-      // تشخیص Firefox
-      const isFirefox = /firefox|fxios/.test(ua);
-      
-      return isChrome || isFirefox;
-    }
-    
-    // تشخیص تلگرام
-    function isTelegram() {
-      const ua = navigator.userAgent.toLowerCase();
-      return ua.indexOf('telegram') > -1 || ua.indexOf('telegraph') > -1;
-    }
-    
-    // تابع باز کردن لینک با روش‌های مختلف
-    function openInBrowser(browserType) {
-      // برای اندروید - استفاده از intent
-      if (/Android/i.test(navigator.userAgent)) {
-        let intentUrl = TARGET_URL;
-        
-        if (browserType === 'chrome') {
-          // intent مخصوص کروم
-          intentUrl = `intent://${TARGET_URL.replace('https://', '').replace('http://', '')}#Intent;scheme=https;package=com.android.chrome;end`;
-        } else if (browserType === 'firefox') {
-          // intent مخصوص فایرفاکس
-          intentUrl = `intent://${TARGET_URL.replace('https://', '').replace('http://', '')}#Intent;scheme=https;package=org.mozilla.firefox;end`;
-        }
-        
-        // تلاش با intent
-        window.location.href = intentUrl;
-        
-        // پشتیبان: اگر intent کار نکرد
-        setTimeout(() => {
-          window.open(TARGET_URL, '_blank');
-        }, 300);
-      } else {
-        // برای آیفون یا کامپیوتر - باز کردن مستقیم
-        window.open(TARGET_URL, '_blank');
+    document.getElementById('copyBtn').onclick = async function() {
+      try {
+        await navigator.clipboard.writeText(TARGET_URL);
+        showMessage();
+      } catch {
+        const ta = document.createElement('textarea');
+        ta.value = TARGET_URL;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        showMessage();
       }
-      
-      // نمایش پیام راهنما
-      setTimeout(() => {
-        alert(`💡 Tip:\nIf ${browserType} doesn't open automatically, use the Copy button and paste manually.`);
-      }, 1000);
-    }
+    };
     
-    // اجرای فوری بررسی
-    (function() {
-      // اگر کروم یا فایرفاکس بود (و تلگرام نبود)، بلافاصله ریدایرکت کن
-      if (isChromeOrFirefox() && !isTelegram()) {
-        window.location.replace(TARGET_URL);
-        return;
-      }
-      
-      // اگر به اینجا رسید، یعنی مرورگر مجاز نیست
-      document.getElementById('content').style.display = 'block';
-      document.getElementById('urlDisplay').innerText = TARGET_URL;
-      
-      // دکمه کروم
-      document.getElementById('chromeBtn').onclick = function() {
-        openInBrowser('chrome');
-      };
-      
-      // دکمه فایرفاکس
-      document.getElementById('firefoxBtn').onclick = function() {
-        openInBrowser('firefox');
-      };
-      
-      // دکمه کپی
-      document.getElementById('copyBtn').onclick = async function() {
-        try {
-          await navigator.clipboard.writeText(TARGET_URL);
-          alert('✅ Link copied! Now open Chrome/Firefox and paste it.');
-        } catch (err) {
-          // روش قدیمی کپی
-          const textarea = document.createElement('textarea');
-          textarea.value = TARGET_URL;
-          textarea.style.position = 'fixed';
-          textarea.style.opacity = '0';
-          document.body.appendChild(textarea);
-          textarea.select();
-          document.execCommand('copy');
-          document.body.removeChild(textarea);
-          alert('✅ Link copied! Now open Chrome/Firefox and paste it.');
-        }
-      };
-      
-      // نمایش هشدار تلگرام
-      document.getElementById('browserWarning').style.display = isTelegram() ? 'block' : 'none';
-    })();
+    function showMessage() {
+      const msg = document.getElementById('successMsg');
+      msg.style.display = 'block';
+      setTimeout(() => msg.style.display = 'none', 2000);
+    }
   </script>
 </body>
 </html>
